@@ -26,7 +26,8 @@ type Stage = "intro" | "lead" | "quiz" | "loading" | "result";
 type Answer = { text: string; profile: ProfileKey };
 type Question = { title: string; answers: Answer[] };
 
-const SHEETS_ENDPOINT = process.env.NEXT_PUBLIC_SHEETS_ENDPOINT ?? "";
+const SHEETS_ENDPOINT = process.env.NEXT_PUBLIC_SHEETS_ENDPOINT
+  ?? "https://script.google.com/macros/s/AKfycbxyptDmBBeBbclV7ZFY6eWq4xe-Kb_cjmuIF0-68mIph9L65uy-ZfAkThsjYM3F4J92/exec";
 const WHATSAPP_NUMBER = "559140424250";
 
 const questions: Question[] = [
