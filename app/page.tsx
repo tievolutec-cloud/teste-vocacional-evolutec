@@ -18,7 +18,7 @@ import {
   Target,
   Users,
 } from "lucide-react";
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
 type ProfileKey = "gestao" | "comunicacao" | "criatividade" | "tecnologia" | "analise";
 type Stage = "intro" | "lead" | "quiz" | "loading" | "result";
@@ -254,6 +254,74 @@ function TopLogo() {
   );
 }
 
+function JourneyCounter() {
+  const [target, setTarget] = useState(8709);
+  const [displayed, setDisplayed] = useState(0);
+  const previousTarget = useRef(0);
+
+  useEffect(() => {
+    let active = true;
+
+    async function refreshCounter() {
+      try {
+        const response = await fetch("/api/counter", { cache: "no-store" });
+        if (!response.ok) return;
+        const data = await response.json() as { count?: number };
+        if (active && typeof data.count === "number" && data.count >= 8709) {
+          setTarget(Math.floor(data.count));
+        }
+      } catch {
+        // O valor-base continua visível caso a consulta fique indisponível.
+      }
+    }
+
+    void refreshCounter();
+    const interval = window.setInterval(refreshCounter, 60_000);
+    return () => {
+      active = false;
+      window.clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      setDisplayed(target);
+      previousTarget.current = target;
+      return;
+    }
+
+    const startValue = previousTarget.current;
+    const distance = target - startValue;
+    const duration = startValue === 0 ? 1750 : 850;
+    const startedAt = performance.now();
+    let frame = 0;
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      setDisplayed(Math.round(startValue + distance * eased));
+
+      if (progress < 1) {
+        frame = window.requestAnimationFrame(tick);
+      } else {
+        previousTarget.current = target;
+      }
+    };
+
+    frame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frame);
+  }, [target]);
+
+  return (
+    <div className="journey-counter" aria-label={`${target.toLocaleString("pt-BR")} pessoas já descobriram sua carreira ideal`}>
+      <span className="counter-kicker"><Users size={16} /> Você não está sozinho nessa jornada!</span>
+      <strong className="counter-value" aria-live="polite">{displayed.toLocaleString("pt-BR")}</strong>
+      <span className="counter-caption">pessoas já descobriram sua carreira ideal</span>
+    </div>
+  );
+}
+
 export default function Home() {
   const [stage, setStage] = useState<Stage>("intro");
   const [lead, setLead] = useState({ name: "", phone: "" });
@@ -355,6 +423,7 @@ export default function Home() {
               <div><Clock3 size={20} /><span><strong>3 minutos</strong> para responder</span></div>
               <div><BrainCircuit size={20} /><span><strong>12 perguntas</strong> personalizadas</span></div>
             </div>
+            <JourneyCounter />
             <button className="primary-cta" type="button" onClick={() => setStage("lead")}>Começar meu teste <ArrowRight size={20} /></button>
             <p className="privacy-note">Resultado imediato • Seus dados ficam protegidos</p>
           </div>
