@@ -7,9 +7,10 @@ Landing page interativa com 12 perguntas, resultado por perfil vocacional, recom
 1. Na Vercel, clique em **Add New > Project**.
 2. Importe o repositório `tievolutec-cloud/teste-vocacional-evolutec`.
 3. Mantenha o framework detectado como **Next.js**.
-4. Clique em **Deploy**.
+4. Configure `NEXT_PUBLIC_SHEETS_ENDPOINT` com o endereço do Web App criado pelo Google Apps Script.
+5. Clique em **Deploy**.
 
-Nenhuma variável de ambiente é necessária na configuração atual.
+O arquivo `integracao-google-sheets/Code.gs` contém o código pronto para receber os resultados na planilha **Teste Vocacional 2026**.
 
 ## Desenvolvimento local
 

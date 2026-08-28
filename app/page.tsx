@@ -26,7 +26,7 @@ type Stage = "intro" | "lead" | "quiz" | "loading" | "result";
 type Answer = { text: string; profile: ProfileKey };
 type Question = { title: string; answers: Answer[] };
 
-const SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbyLSZ9MRp-k_xuOdaOSxJQX0gedcKxP28G-6ujy6Qj27XH1owXzh2eryucWRhU7JbU71Q/exec";
+const SHEETS_ENDPOINT = process.env.NEXT_PUBLIC_SHEETS_ENDPOINT ?? "";
 const WHATSAPP_NUMBER = "559140424250";
 
 const questions: Question[] = [
@@ -280,6 +280,7 @@ export default function Home() {
   }
 
   async function sendLead(finalAnswers: ProfileKey[], finalResult: ProfileKey) {
+    if (!SHEETS_ENDPOINT) return;
     const data = profileData[finalResult];
     try {
       await fetch(SHEETS_ENDPOINT, {
