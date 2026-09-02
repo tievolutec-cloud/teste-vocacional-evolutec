@@ -286,12 +286,15 @@ button { cursor: pointer; }
 .mini-proof svg { flex: 0 0 auto; color: var(--yellow); }
 .lead-form { display: flex; flex-direction: column; justify-content: center; padding: clamp(35px, 5vw, 65px); }
 .lead-form label { margin: 0 0 8px; color: var(--ink); font-size: 14px; font-weight: 800; }
-.lead-form input {
+.lead-form input,
+.lead-form select {
   width: 100%; min-height: 56px; margin: 0 0 22px; padding: 0 17px;
+  font: inherit;
   border: 1px solid #cddceb; border-radius: 13px; outline: 0;
   background: #fbfdff; color: var(--ink); transition: border-color .2s ease, box-shadow .2s ease;
 }
-.lead-form input:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(7,85,189,.1); }
+.lead-form input:focus,
+.lead-form select:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(7,85,189,.1); }
 .form-error { margin: -7px 0 14px; color: #c80f1a; font-size: 13px; font-weight: 700; }
 .form-cta { width: 100%; margin-top: 3px; }
 .consent-copy { margin: 13px 0 0; color: #8594a5; text-align: center; font-size: 10px; line-height: 1.5; }

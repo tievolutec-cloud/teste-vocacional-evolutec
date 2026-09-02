@@ -11,4 +11,4 @@
 9. Clique em **Implantar**, autorize e copie o endereço terminado em `/exec`.
 10. Na Vercel, crie a variável `NEXT_PUBLIC_SHEETS_ENDPOINT` com esse endereço e faça um novo deploy.
 
-Os dados serão gravados a partir da linha 3 nas colunas Nome, Telefone e Perfil / Curso.
+Os dados serão gravados a partir da linha 3 nas colunas Nome, Telefone, Perfil / Curso e Já é Aluno.

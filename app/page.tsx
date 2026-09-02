@@ -324,7 +324,7 @@ function JourneyCounter() {
 
 export default function Home() {
   const [stage, setStage] = useState<Stage>("intro");
-  const [lead, setLead] = useState({ name: "", phone: "" });
+  const [lead, setLead] = useState({ isStudent: "", name: "", phone: "" });
   const [leadError, setLeadError] = useState("");
   const [questionIndex, setQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<ProfileKey[]>([]);
@@ -336,6 +336,10 @@ export default function Home() {
   function handleLeadSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const phoneDigits = lead.phone.replace(/\D/g, "");
+    if (!lead.isStudent) {
+      setLeadError("Informe se você já é aluno da Evolutec.");
+      return;
+    }
     if (lead.name.trim().length < 2) {
       setLeadError("Digite seu nome para continuar.");
       return;
@@ -359,6 +363,7 @@ export default function Home() {
         body: JSON.stringify({
           nome: lead.name.trim(),
           telefone: lead.phone,
+          jaAluno: lead.isStudent,
           curso: data.courses[0].name,
           cidade: "Teste Vocacional",
           perfil: data.name,
@@ -457,8 +462,14 @@ export default function Home() {
               <div className="mini-proof"><ShieldCheck size={19} /><span>Seus dados serão usados para apresentar cursos compatíveis com seu resultado.</span></div>
             </div>
             <form className="lead-form" onSubmit={handleLeadSubmit} noValidate>
+              <label htmlFor="isStudent">Você já é aluno da Evolutec?</label>
+              <select id="isStudent" name="isStudent" value={lead.isStudent} onChange={(e) => setLead({ ...lead, isStudent: e.target.value })} autoFocus required>
+                <option value="" disabled>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+              </select>
               <label htmlFor="name">Como podemos te chamar?</label>
-              <input id="name" name="name" autoComplete="name" value={lead.name} onChange={(e) => setLead({ ...lead, name: e.target.value })} placeholder="Digite seu nome" autoFocus />
+              <input id="name" name="name" autoComplete="name" value={lead.name} onChange={(e) => setLead({ ...lead, name: e.target.value })} placeholder="Digite seu nome" />
               <label htmlFor="phone">Qual é o seu WhatsApp?</label>
               <input id="phone" name="phone" type="tel" inputMode="numeric" autoComplete="tel" value={lead.phone} onChange={(e) => setLead({ ...lead, phone: formatPhone(e.target.value) })} placeholder="(91) 99999-9999" />
               {leadError && <p className="form-error" role="alert">{leadError}</p>}

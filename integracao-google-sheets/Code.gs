@@ -15,11 +15,12 @@ function doPost(e) {
     const data = JSON.parse(e.postData.contents || "{}");
     const name = cleanCell(data.nome);
     const phone = cleanCell(data.telefone);
+    const isStudent = cleanCell(data.jaAluno);
     const profile = cleanCell(data.perfil);
     const course = cleanCell(data.curso);
 
-    if (!name || !phone) {
-      throw new Error("Nome e telefone são obrigatórios.");
+    if (!name || !phone || !["Sim", "Não"].includes(isStudent)) {
+      throw new Error("Nome, telefone e a informação de aluno são obrigatórios.");
     }
 
     const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
@@ -30,8 +31,8 @@ function doPost(e) {
     }
 
     const nextRow = Math.max(sheet.getLastRow() + 1, 3);
-    sheet.getRange(nextRow, 1, 1, 3).setValues([
-      [name, phone, [profile, course].filter(Boolean).join(" / ")],
+    sheet.getRange(nextRow, 1, 1, 4).setValues([
+      [name, phone, [profile, course].filter(Boolean).join(" / "), isStudent],
     ]);
 
     return ContentService
