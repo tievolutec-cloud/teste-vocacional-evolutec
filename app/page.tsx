@@ -168,9 +168,13 @@ const profileData: Record<ProfileKey, {
     color: "#0755bd",
     icon: Target,
     courses: [
-      { name: "Auxiliar Administrativo", description: "Rotinas empresariais, atendimento, documentos e organização profissional." },
-      { name: "Gestão Empresarial", description: "Visão completa de processos, liderança e funcionamento de empresas." },
-      { name: "RH e Departamento Pessoal", description: "Pessoas, rotinas trabalhistas e apoio estratégico às equipes." },
+      { name: "AUXILIAR ADMINISTRATIVO", description: "Rotinas empresariais, atendimento, documentos e organização profissional." },
+      { name: "GESTAO EMPRESARIAL + IA", description: "Gestão de negócios aliada a ferramentas de inteligência artificial." },
+      { name: "GESTAO DE PROJETOS", description: "Planejamento, execução e acompanhamento de projetos e resultados." },
+      { name: "GESTAO DE PESSOAS", description: "Desenvolvimento de equipes, liderança e rotinas de gestão humana." },
+      { name: "ROTINAS ADMINISTRATIVAS.", description: "Processos, controles e atividades essenciais do ambiente administrativo." },
+      { name: "DOCUMENTOS PROFISSIONAIS", description: "Criação e organização de documentos para o ambiente de trabalho." },
+      { name: "PRODUTIVIDADE OFFICE E GOOGLE", description: "Ferramentas digitais para organização, colaboração e produtividade." },
     ],
   },
   comunicacao: {
@@ -180,9 +184,10 @@ const profileData: Record<ProfileKey, {
     color: "#ec101c",
     icon: Users,
     courses: [
-      { name: "Profissional em Vendas", description: "Técnicas de negociação, relacionamento e fechamento de oportunidades." },
-      { name: "Atendente de Farmácia", description: "Atendimento responsável, produtos e rotina do setor farmacêutico." },
-      { name: "Operador de Caixa", description: "Atendimento, agilidade e segurança nas operações comerciais." },
+      { name: "VENDAS E ATENDIMENTO", description: "Atendimento ao cliente, negociação e desenvolvimento comercial." },
+      { name: "COMUNICACAO CORPORATIVA", description: "Comunicação profissional clara para equipes, clientes e empresas." },
+      { name: "ATENDIMENTO EM FARMACIA", description: "Atendimento ao público e conhecimentos aplicados à rotina de farmácia." },
+      { name: "OPERADOR DE CAIXA", description: "Atendimento, agilidade e segurança nas operações comerciais." },
     ],
   },
   criatividade: {
@@ -192,9 +197,10 @@ const profileData: Record<ProfileKey, {
     color: "#e99500",
     icon: Lightbulb,
     courses: [
-      { name: "Designer Gráfico", description: "Criação visual, marcas, peças publicitárias e comunicação profissional." },
-      { name: "Marketing Digital", description: "Estratégias, conteúdo, redes sociais e presença digital que gera resultados." },
-      { name: "Profissional Web", description: "Criação para internet e desenvolvimento de experiências digitais." },
+      { name: "MARKETING DIGITAL com IA", description: "Estratégias digitais, conteúdo e uso da IA aplicado ao marketing." },
+      { name: "DESIGNE DIGITAL PRO", description: "Criação visual e desenvolvimento de peças para meios digitais." },
+      { name: "ANIMACAO 3D", description: "Modelagem, cenários e produção visual tridimensional." },
+      { name: "YOUTUBER", description: "Planejamento, produção e comunicação para conteúdo em vídeo." },
     ],
   },
   tecnologia: {
@@ -204,9 +210,17 @@ const profileData: Record<ProfileKey, {
     color: "#095cc8",
     icon: BrainCircuit,
     courses: [
-      { name: "Manutenção de Computadores", description: "Diagnóstico, montagem e solução de problemas em equipamentos." },
-      { name: "Redes e Infraestrutura", description: "Conectividade, configuração e funcionamento de redes profissionais." },
-      { name: "Programação", description: "Lógica e desenvolvimento de soluções digitais para problemas reais." },
+      { name: "DESENVOLVIMENTO DE SISTEMA", description: "Lógica, planejamento e construção de sistemas digitais." },
+      { name: "DESENVOLVIMENTO DE APPS", description: "Criação de aplicativos e soluções para dispositivos móveis." },
+      { name: "DESENVOLVIMENTO WEB", description: "Construção de sites e experiências para a internet." },
+      { name: "PROGRAMACAO E AUTOMOCAO", description: "Programação aplicada à criação de soluções e automação de tarefas." },
+      { name: "Desenvolvedor de Games", description: "Criação de jogos, lógica e desenvolvimento de experiências interativas." },
+      { name: "Manutenção de Computadores e Redes e   Infra Estrutura", description: "Diagnóstico de computadores, conectividade e infraestrutura de redes." },
+      { name: "MANUTENCAO DE CELULAR", description: "Diagnóstico e manutenção de dispositivos móveis." },
+      { name: "AUTOCAD MECÂNICO", description: "Desenho técnico e projetos mecânicos com AutoCAD." },
+      { name: "INFORMATICA ESSENCIAL", description: "Fundamentos de informática e uso seguro das ferramentas digitais." },
+      { name: "INFORMATICA KIDS - Tecnologia Aplicada", description: "Tecnologia aplicada para alunos de 8 a 12 anos." },
+      { name: "INFORMATICA KIDS - Essencial primeiros   Passos", description: "Primeiros passos na informática para alunos de 8 a 12 anos." },
     ],
   },
   analise: {
@@ -216,9 +230,11 @@ const profileData: Record<ProfileKey, {
     color: "#0a9b6c",
     icon: BarChart3,
     courses: [
-      { name: "Excel Completo", description: "Planilhas, controles e recursos essenciais para qualquer área profissional." },
-      { name: "Power BI", description: "Análise visual de dados, indicadores e apoio à tomada de decisão." },
-      { name: "Inteligência Artificial", description: "Ferramentas inteligentes para produtividade, análise e inovação." },
+      { name: "POWER B.I & DATA ANALYTICS", description: "Análise de dados, indicadores e visualização de informações." },
+      { name: "EXCEL PROFISSIONAL", description: "Planilhas e recursos profissionais para análise e produtividade." },
+      { name: "EXCEL AVANCADO", description: "Fórmulas, automações e análises avançadas em planilhas." },
+      { name: "IA NA PRATICA PROFISSIONAL", description: "Aplicação profissional da inteligência artificial em tarefas e processos." },
+      { name: "I.A NA PRÁTICA", description: "Uso prático da inteligência artificial no dia a dia." },
     ],
   },
 };
@@ -364,7 +380,7 @@ export default function Home() {
           nome: lead.name.trim(),
           telefone: lead.phone,
           jaAluno: lead.isStudent,
-          curso: data.courses[0].name,
+          curso: data.courses.slice(0, 3).map((course) => course.name).join(" | "),
           cidade: "Teste Vocacional",
           perfil: data.name,
           respostas: finalAnswers.join(","),
@@ -565,11 +581,11 @@ export default function Home() {
         </div>
 
         <div className="courses-section">
-          <div className="section-heading"><span><Target size={17} /> Cursos que combinam com você</span><h2>Três caminhos para transformar seu potencial em profissão</h2></div>
+          <div className="section-heading"><span><Target size={17} /> Cursos que combinam com você</span><h2>Formações da Evolutec que combinam com o seu perfil</h2></div>
           <div className="course-grid">
             {result.courses.map((course, index) => (
               <article className="course-card" key={course.name}>
-                <span className="course-number">0{index + 1}</span>
+                <span className="course-number">{String(index + 1).padStart(2, "0")}</span>
                 <h3>{course.name}</h3><p>{course.description}</p>
                 <span className="course-fit"><Check size={14} /> Recomendado para seu perfil</span>
               </article>
