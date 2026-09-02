@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { track } from "@vercel/analytics";
 import {
   ArrowLeft,
   ArrowRight,
@@ -345,6 +346,8 @@ export default function Home() {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<ProfileKey[]>([]);
   const [resultKey, setResultKey] = useState<ProfileKey>("gestao");
+  const testStartedTracked = useRef(false);
+  const testCompletedTracked = useRef(false);
 
   const scores = useMemo(() => getScores(answers), [answers]);
   const result = profileData[resultKey];
@@ -365,6 +368,10 @@ export default function Home() {
       return;
     }
     setLeadError("");
+    if (!testStartedTracked.current) {
+      testStartedTracked.current = true;
+      track("teste_iniciado", { ja_aluno: lead.isStudent });
+    }
     setStage("quiz");
   }
 
@@ -405,6 +412,13 @@ export default function Home() {
     const finalScores = getScores(nextAnswers);
     const ranked = (Object.entries(finalScores) as [ProfileKey, number][]).sort((a, b) => b[1] - a[1]);
     const finalResult = ranked[0][0];
+    if (!testCompletedTracked.current) {
+      testCompletedTracked.current = true;
+      track("teste_concluido", {
+        perfil: profileData[finalResult].name,
+        ja_aluno: lead.isStudent,
+      });
+    }
     setResultKey(finalResult);
     setStage("loading");
     void sendLead(nextAnswers, finalResult);
@@ -424,6 +438,8 @@ export default function Home() {
     setQuestionIndex(0);
     setAnswers([]);
     setResultKey("gestao");
+    testStartedTracked.current = false;
+    testCompletedTracked.current = false;
   }
 
   const whatsappText = encodeURIComponent(
